@@ -48,13 +48,16 @@ public class Model {
 	public ArrayList<String> displayNeighbours(String parolaInserita) {
 		if(this.grafo==null)
 			return null;
+		WordDAO dao= new WordDAO();
 		ArrayList<String> arrivi=new ArrayList<String>();
-		for(DefaultEdge e: grafo.edgesOf(parolaInserita)) {
-			if(!parolaInserita.equals(grafo.getEdgeSource(e)))
-				arrivi.add(grafo.getEdgeSource(e));
-			else
-				arrivi.add(grafo.getEdgeTarget(e));
-			
+		for(int d=0;d<parolaInserita.length();d++) {
+			parolaInserita.charAt(d);
+			StringBuilder parola = new StringBuilder(parolaInserita);
+			parola.setCharAt(d, '_');
+			arrivi.addAll(dao.getParticularWords(""+parola));
+		}
+		while (arrivi.contains(parolaInserita)) {
+		arrivi.remove(parolaInserita);
 		}
 		return arrivi;
 	}

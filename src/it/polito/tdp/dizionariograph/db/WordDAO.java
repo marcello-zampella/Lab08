@@ -26,7 +26,32 @@ public class WordDAO {
 			while (res.next()) {
 				parole.add(res.getString("nome"));
 			}
+			conn.close();
+			return parole;
 
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Error Connection Database");
+		}
+	}
+	
+	public List<String> getParticularWords (String parolaParziale){
+
+		String sql = "SELECT * " + 
+				"FROM parola " + 
+				"WHERE nome LIKE ?;";
+		List<String> parole = new ArrayList<String>();
+
+		try {
+			Connection conn = ConnectDB.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, parolaParziale);
+			ResultSet res = st.executeQuery();
+
+			while (res.next()) {
+				parole.add(res.getString("nome"));
+			}
+			conn.close();
 			return parole;
 
 		} catch (SQLException e) {
