@@ -54,7 +54,6 @@ public class Model {
 				arrivi.add(grafo.getEdgeSource(e));
 			else
 				arrivi.add(grafo.getEdgeTarget(e));
-			
 		}
 		return arrivi;
 	}

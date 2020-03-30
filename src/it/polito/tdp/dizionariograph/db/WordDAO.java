@@ -26,7 +26,7 @@ public class WordDAO {
 			while (res.next()) {
 				parole.add(res.getString("nome"));
 			}
-
+			conn.close();
 			return parole;
 
 		} catch (SQLException e) {
